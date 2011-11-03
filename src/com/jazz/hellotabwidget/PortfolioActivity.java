@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.widget.TextView;
 
 public class PortfolioActivity extends Activity {
@@ -22,7 +23,7 @@ public class PortfolioActivity extends Activity {
         float mExShare=0;
         float mHsbcShare=0;
         float totalPort=0;
-        
+        Log.v("jazz", "Something");
       //BP Amoco PLC UNITS: 192
         String bpcode = "LON:BP";
 
