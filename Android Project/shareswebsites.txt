@@ -1,0 +1,9 @@
+http://finance.google.com/finance/info?client=ig&q=LON:BP
+
+http://finance.google.com/finance/info?client=ig&q=LON:MKS
+
+http://finance.google.com/finance/info?client=ig&q=LON:SN
+
+http://finance.google.com/finance/info?client=ig&q=PINK:EXPGF
+
+http://finance.google.com/finance/info?client=ig&q=NYSE:HBC
