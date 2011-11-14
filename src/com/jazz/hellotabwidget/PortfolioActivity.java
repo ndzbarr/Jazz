@@ -23,6 +23,7 @@ public class PortfolioActivity extends Activity
         float mSnShare=0;
         float mExShare=0;
         float mHsbcShare=0;
+        float mBShare=0;
         float totalPort=0;
         Log.v("jazz", "Something");
         
@@ -36,7 +37,7 @@ public class PortfolioActivity extends Activity
         String excode = "LON:EXPN";
         //HSBC Holding PLC UNITS: 343
         String hbccode = "LON:HSBA";
-        //Boleven PLC PLC UNITS: 
+        //Bowleven PLC PLC UNITS: 3960
         String bplccode = "LON:BLVN";
         
         URL con;
@@ -237,12 +238,51 @@ public class PortfolioActivity extends Activity
 		       textview.setText("\nError: No connection to the SN value available.  Please try again.\n");
 		       e.printStackTrace();
 		}
+        // BOwLEVEN PLC
+        try
+        {
+        	con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bplccode);       
+		    BufferedReader in = new BufferedReader(
+		    new InputStreamReader(
+		
+		    con.openStream()));
+		    String line = "";
+		    int i = 0;
+		       
+		    while(i <7)
+		    {
+			    line = in.readLine();
+			    i++;
+		    }
+		    String snShare= line;
+		       
+		    String re1=".*?";	// Non-greedy match on filler
+		    String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
+		
+		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    Matcher m = p.matcher(snShare);
+		    if (m.find())
+		    {
+		    	String float3=m.group(1);
+		        textview.append(Html.fromHtml(("<b><i>Bowleven PLC</i></b><br>")));
+		        textview.append(float3.toString()+""+"\n");
+		        mBShare = Float.valueOf(float3.trim()).floatValue();
+		    }                                             
+		        setContentView(textview);
+		        in.close();
+	    }
+        catch (Exception e)
+        {
+		       textview.setText("\nError: No connection to the SN value available.  Please try again.\n");
+		       e.printStackTrace();
+		}
         //
         totalPort = mbpShare*192;
         totalPort = totalPort+(mSnShare*1219);	
         totalPort = totalPort+(mHsbcShare*343);
         totalPort = totalPort+(mMksShare*485);
         totalPort = totalPort+(mExShare*258);
+        totalPort = totalPort+(mBShare*3960);
         
         totalPort = (totalPort/100);
         double newTotal = Math.round(totalPort*100)/100;
