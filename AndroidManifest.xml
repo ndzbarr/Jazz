@@ -26,6 +26,17 @@
                   android:screenOrientation="portrait">
         </activity>
         
+        <activity android:name=".SharesRun"
+                  android:label="@string/app_name"
+                  android:screenOrientation="portrait">
+        </activity>
+        
+        <activity android:name=".RocketPlumet"
+                  android:label="@string/app_name"
+                  android:screenOrientation="portrait">
+        </activity>
+        
+        
        
 
     </application>

@@ -12,9 +12,10 @@ import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 
-public class PortfolioActivity extends Activity {
-
-	public void onCreate(Bundle savedInstanceState) {
+public class PortfolioActivity extends Activity
+{
+	public void onCreate(Bundle savedInstanceState)
+	{
         super.onCreate(savedInstanceState);
    
         float mbpShare = 0;
@@ -24,9 +25,9 @@ public class PortfolioActivity extends Activity {
         float mHsbcShare=0;
         float totalPort=0;
         Log.v("jazz", "Something");
-      //BP Amoco PLC UNITS: 192
+        
+        //BP Amoco PLC UNITS: 192
         String bpcode = "LON:BP";
-
         //Marks and Spencer Ordinary UNITS: 485
         String mkscode = "LON:MKS";
         //Smith & Nephew PLC UNITS: 1219
@@ -35,6 +36,9 @@ public class PortfolioActivity extends Activity {
         String excode = "LON:EXPN";
         //HSBC Holding PLC UNITS: 343
         String hbccode = "LON:HSBA";
+        //Boleven PLC PLC UNITS: 
+        String bplccode = "LON:BLVN";
+        
         URL con;
 
         TextView textview = new TextView(this);

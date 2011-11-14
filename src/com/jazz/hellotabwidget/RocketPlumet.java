@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
 
-public class SharesActivity extends Activity 
+public class RocketPlumet extends Activity 
 {
     public void onCreate(Bundle savedInstanceState) 
     {
