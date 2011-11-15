@@ -263,6 +263,44 @@ public class SharesActivity extends Activity
 	        textview.setText("Error:  No MKS share value not available.  Please try again.\n");
 	        e.printStackTrace();
         }
+        try
+        {
+	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bplccode);
+	        BufferedReader in = new BufferedReader(
+	        new InputStreamReader(
+	
+	        con.openStream()));
+	        String line = "";
+	        int i = 0;
+	        
+	        while(i <7)
+	        {
+		        line = in.readLine();
+		        i++;
+	        }
+	   
+	        String bShare= line;
+	
+	        String re1=".*?";	// Non-greedy match on filler
+	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
+	
+	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+	        Matcher m = p.matcher(bShare);
+	        if (m.find())
+	        {
+	            String float2=m.group(1);
+	            mBShare = Float.valueOf(float2.trim()).floatValue();
+	
+	        }                                    
+	        setContentView(textview);
+	        in.close();
+        }
+        catch (Exception e)
+        {
+	        textview.setText("Error:  No Bowleven share value not available.  Please try again.\n");
+	        e.printStackTrace();
+        }
+        
         
         //calculate shares total and divide by 100(to the pound)
         float mbpTotal=((mbpShare*192)/100);
@@ -293,7 +331,7 @@ public class SharesActivity extends Activity
         textview.append(mMksShare+("\nTotal:                                          £"+(int)newMksTotal+"\n\n"));
         textview.append(Html.fromHtml(("<b><i>Smith and Nephew PLC</i></b><br>1219 shares at ")));
         textview.append(mSnShare+("\nTotal:                                          £"+(int)newSnTotal+"\n\n"));
-        textview.append(Html.fromHtml(("<b><i>Bowleveb PLC</i></b><br>3960 shares at ")));
+        textview.append(Html.fromHtml(("<b><i>Bowleven PLC</i></b><br>3960 shares at ")));
         textview.append(mBShare+("\nTotal:                                          £"+(int)newBTotal+"\n\n"));        
     }
 }

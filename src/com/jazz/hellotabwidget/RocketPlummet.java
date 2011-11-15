@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
 
-public class SharesRun extends Activity 
+public class RocketPlummet extends Activity 
 {
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -239,7 +239,7 @@ public class SharesRun extends Activity
         double newSnTotal = Math.round(mSnTotal*100)/100;
         
         //displays shares value
-        textview.append(Html.fromHtml(("<b><h1>RUN OF SHARES</h1></b><br>")));
+        textview.append(Html.fromHtml(("<b><h1>ROCKET OR PLUMMET</h1></b><br>")));
 
         textview.append(Html.fromHtml(("<b><i>BP Amoco</i></b><br>192 shares at ")));
         textview.append(mbpShare+("\nTotal:                                          £"+(int)newBpTotal+"\n\n"));

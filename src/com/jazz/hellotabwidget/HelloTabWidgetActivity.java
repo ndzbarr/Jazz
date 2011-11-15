@@ -30,19 +30,19 @@ public class HelloTabWidgetActivity extends TabActivity
         // Do the same for the other tabs
         intent = new Intent().setClass(this, SharesActivity.class);
         spec = tabHost.newTabSpec("Shares").setIndicator("Shares",
-                          res.getDrawable(R.drawable.oc_tab_graph))
+                          res.getDrawable(R.drawable.ic_tab_graph))
                       .setContent(intent);
         tabHost.addTab(spec);
         
         intent = new Intent().setClass(this, SharesRun.class);
         spec = tabHost.newTabSpec("Run of Shares").setIndicator("Run of Shares",
-                res.getDrawable(R.drawable.oc_tab_graph))
+                res.getDrawable(R.drawable.ic_tab_run))
             .setContent(intent);
         tabHost.addTab(spec);
         
-        intent = new Intent().setClass(this, RocketPlumet.class);
+        intent = new Intent().setClass(this, RocketPlummet.class);
         spec = tabHost.newTabSpec("Rocket/Plumet").setIndicator("Rocket/Plumet",
-                res.getDrawable(R.drawable.oc_tab_graph))
+                res.getDrawable(R.drawable.ic_tab_rise))
             .setContent(intent);
         tabHost.addTab(spec);
        

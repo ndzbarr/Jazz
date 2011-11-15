@@ -238,7 +238,7 @@ public class PortfolioActivity extends Activity
 		       textview.setText("\nError: No connection to the SN value available.  Please try again.\n");
 		       e.printStackTrace();
 		}
-        // BOwLEVEN PLC
+        // BOWLEVEN PLC
         try
         {
         	con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bplccode);       
@@ -254,13 +254,13 @@ public class PortfolioActivity extends Activity
 			    line = in.readLine();
 			    i++;
 		    }
-		    String snShare= line;
+		    String blShare= line;
 		       
 		    String re1=".*?";	// Non-greedy match on filler
 		    String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
 		
 		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		    Matcher m = p.matcher(snShare);
+		    Matcher m = p.matcher(blShare);
 		    if (m.find())
 		    {
 		    	String float3=m.group(1);
@@ -273,7 +273,7 @@ public class PortfolioActivity extends Activity
 	    }
         catch (Exception e)
         {
-		       textview.setText("\nError: No connection to the SN value available.  Please try again.\n");
+		       textview.setText("\nError: No connection to the Bowleven value available.  Please try again.\n");
 		       e.printStackTrace();
 		}
         //
