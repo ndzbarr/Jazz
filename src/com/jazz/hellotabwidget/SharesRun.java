@@ -1,6 +1,7 @@
 package com.jazz.hellotabwidget;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.regex.Matcher;
@@ -9,24 +10,30 @@ import java.util.regex.Pattern;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
+
 import android.widget.TextView;
 
-public class SharesRun extends Activity 
+public class SharesRun extends Activity
 {
-    public void onCreate(Bundle savedInstanceState) 
-    {
+	String bpcode = "LON:BP";
+	
+	public void onCreate(Bundle savedInstanceState)
+	{
+		TextView textview = new TextView(this);
         super.onCreate(savedInstanceState);
-        // Let's display the progress in the activity title bar, like the
-        // browser app does.
-        
-        //BP Amoco PLC UNITS: 192
+   
         float mbpShare = 0;
         float mMksShare =0;
         float mSnShare=0;
         float mExShare=0;
         float mHsbcShare=0;
+        float mBShare=0;
+        float totalPort=0;
+        Log.v("jazz", "Something");
+        
+        //BP Amoco PLC UNITS: 192
         String bpcode = "LON:BP";
-
         //Marks and Spencer Ordinary UNITS: 485
         String mkscode = "LON:MKS";
         //Smith & Nephew PLC UNITS: 1219
@@ -35,10 +42,14 @@ public class SharesRun extends Activity
         String excode = "LON:EXPN";
         //HSBC Holding PLC UNITS: 343
         String hbccode = "LON:HSBA";
+        //Bowleven PLC PLC UNITS: 3960
+        String bplccode = "LON:BLVN";
+        
         URL con;
 
-        TextView textview = new TextView(this);
-        //textview.append("Portfolio Total calculated at current share prices: \n\n");
+        setContentView(textview);
+        textview.append(Html.fromHtml(("<h1><b>Run on Shares</h1></b><br>")));
+        //BP AMOCO
         try
         {
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bpcode);
@@ -64,7 +75,8 @@ public class SharesRun extends Activity
 	        if (m.find())
 	        {
 	            String float1=m.group(1);
-	            //textview.append("BP Amoco PLC: "+float1.toString()+""+"\n");
+	            textview.append(Html.fromHtml(("<b><i>BP Amoco</i></b><br>")));
+	            textview.append(float1.toString()+""+"\n");
 	        	mbpShare = Float.valueOf(float1.trim()).floatValue();
 	        }
 	        setContentView(textview);
@@ -72,9 +84,87 @@ public class SharesRun extends Activity
         }
         catch (Exception e)
         {
-	        textview.setText("Error: No BP share value not available.  Please try again.\n");
+	        textview.setText("\nError: No connection to the BP share value available.  Please try again.\n");
 	        e.printStackTrace();
         }
+        //EXPERIAN
+	    try
+	    {
+	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + excode);
+	        BufferedReader in = new BufferedReader(
+	        new InputStreamReader(
+	
+	        con.openStream()));
+	        String line = "";
+	        int i = 0;
+	        
+	        while(i <7)
+	        {
+		        line = in.readLine();
+		        i++;
+	        }
+	        String exShare= line;
+	
+	        String re1=".*?";	// Non-greedy match on filler
+	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
+	
+	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+	        Matcher m = p.matcher(exShare);
+	        if (m.find())
+	        {
+	            String float4=m.group(1);
+	            textview.append(Html.fromHtml(("<b><i>Experian Ord.</i></b><br>")));
+	            textview.append(float4.toString()+""+"\n");
+	            mExShare = Float.valueOf(float4.trim()).floatValue();
+	        }                               
+	        setContentView(textview);
+	        in.close();
+        }
+        catch (Exception e)
+        {
+	        textview.setText("\nError: No connection to the Experian Share value available.  Please try again.\n");
+	        e.printStackTrace();
+        }
+	    //HSBC
+        try
+        {
+	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + hbccode);
+	        BufferedReader in = new BufferedReader(
+	        new InputStreamReader(
+	        		
+	        con.openStream()));
+	        String line = "";
+	        int i = 0;
+	
+	        while(i <7)
+	        {
+		        line = in.readLine();
+		        i++;
+	        }
+	
+	        String hsbcShare= line;
+	        String re1=".*?";	// Non-greedy match on filler
+	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
+	
+	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+	        Matcher m = p.matcher(hsbcShare);
+	        if (m.find())
+	        {
+	            String float5=m.group(1);
+	            textview.append(Html.fromHtml(("<b><i>HSBC Holdings</i></b><br>")));
+	            textview.append(float5.toString()+""+"\n");
+	            mHsbcShare = Float.valueOf(float5.trim()).floatValue();
+	        }
+	        
+	        setContentView(textview);
+	        in.close();
+        }
+        catch (Exception e)
+        {
+        	textview.setText("\nError: No connection to the HSBC Share value available.  Please try again.\n");
+        	e.printStackTrace();
+        } 
+        //MARKS AND SPENCER
         try
         {
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + mkscode);
@@ -101,7 +191,8 @@ public class SharesRun extends Activity
 	        if (m.find())
 	        {
 	            String float2=m.group(1);
-	           // textview.append("Marks and Spencer Ordinary: "+float2.toString()+""+"\n");
+	            textview.append(Html.fromHtml(("<b><i>Marks and Spencer Ord.</i></b><br>")));
+	            textview.append(float2.toString()+""+"\n");
 	            mMksShare = Float.valueOf(float2.trim()).floatValue();
 	
 	        }                                    
@@ -110,9 +201,10 @@ public class SharesRun extends Activity
         }
         catch (Exception e)
         {
-	        textview.setText("Error:  No MKS share value not available.  Please try again.\n");
+	        textview.setText("\nError: No connection to the MKS share value available.  Please try again.\n");
 	        e.printStackTrace();
         }
+        // SMITH AND NEPHEW
         try
         {
 		        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + sncode);       
@@ -138,7 +230,8 @@ public class SharesRun extends Activity
 		        if (m.find())
 		        {
 		            String float3=m.group(1);
-		           // textview.append("Smith & Nephew Plc: "+float3.toString()+""+"\n");
+		            textview.append(Html.fromHtml(("<b><i>Smith & Nephew PLC</i></b><br>")));
+		            textview.append(float3.toString()+""+"\n");
 		            mSnShare = Float.valueOf(float3.trim()).floatValue();
 		
 		        }                                             
@@ -147,111 +240,107 @@ public class SharesRun extends Activity
 	        }
         catch (Exception e)
         {
-		       textview.setText("Error: No Smith & Nephew share value not available.  Please try again.\n");
+		       textview.setText("\nError: No connection to the SN value available.  Please try again.\n");
 		       e.printStackTrace();
 		}
-	    try
-	    {
-	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + excode);
-	        BufferedReader in = new BufferedReader(
-	        new InputStreamReader(
-	
-	        con.openStream()));
-	        String line = "";
-	        int i = 0;
-	        
-	        while(i <7)
-	        {
-		        line = in.readLine();
-		        i++;
-	        }
-	        String exShare= line;
-	
-	        String re1=".*?";	// Non-greedy match on filler
-	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-	
-	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-	        Matcher m = p.matcher(exShare);
-	        if (m.find())
-	        {
-	            String float4=m.group(1);
-	            //textview.append("Experian Ordinary: "+float4.toString()+""+"\n");
-	            mExShare = Float.valueOf(float4.trim()).floatValue();
-	        }                               
-	        setContentView(textview);
-	        in.close();
-        }
-        catch (Exception e)
-        {
-	        textview.setText("Error: No Experian share value not  available.  Please try again.\n");
-	        e.printStackTrace();
-        }
+        // BOWLEVEN PLC
         try
         {
-	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + hbccode);
-	        BufferedReader in = new BufferedReader(
-	        new InputStreamReader(
-	        		
-	        con.openStream()));
-	        String line = "";
-	        int i = 0;
-	
-	        while(i <7)
-	        {
-		        line = in.readLine();
-		        i++;
-	        }
-	
-	        String hsbcShare= line;
-	        String re1=".*?";	// Non-greedy match on filler
-	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-	
-	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-	        Matcher m = p.matcher(hsbcShare);
-	        if (m.find())
-	        {
-	            String float5=m.group(1);
-	           // textview.append("HSBC Holdings: "+float5.toString()+""+"\n");
-	            mHsbcShare = Float.valueOf(float5.trim()).floatValue();
-	        }
-	        
-	        setContentView(textview);
-	        in.close();
-        }
+        	con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bplccode);       
+		    BufferedReader in = new BufferedReader(
+		    new InputStreamReader(
+		
+		    con.openStream()));
+		    String line = "";
+		    int i = 0;
+		       
+		    while(i <7)
+		    {
+			    line = in.readLine();
+			    i++;
+		    }
+		    String blShare= line;
+		       
+		    String re1=".*?";	// Non-greedy match on filler
+		    String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
+		
+		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    Matcher m = p.matcher(blShare);
+		    if (m.find())
+		    {
+		    	String float3=m.group(1);
+		        textview.append(Html.fromHtml(("<b><i>Bowleven PLC</i></b><br>")));
+		        textview.append(float3.toString()+""+"\n");
+		        mBShare = Float.valueOf(float3.trim()).floatValue();
+		    }                                             
+		        setContentView(textview);
+		        in.close();
+	    }
         catch (Exception e)
         {
-        	textview.setText("Error: No HSBC share value not available.  Please try again.\n");
-        	e.printStackTrace();
-        } 
+		       textview.setText("\nError: No connection to the Bowleven value available.  Please try again.\n");
+		       e.printStackTrace();
+		}
+        //
+        totalPort = mbpShare*192;
+        totalPort = totalPort+(mSnShare*1219);	
+        totalPort = totalPort+(mHsbcShare*343);
+        totalPort = totalPort+(mMksShare*485);
+        totalPort = totalPort+(mExShare*258);
+        totalPort = totalPort+(mBShare*3960);
         
-        //calculate shares total and divide by 100(to the pound)
-        float mbpTotal=((mbpShare*192)/100);
-        float mHsbcTotal=((mHsbcShare*343)/100);
-        float mExTotal=((mExShare*258)/100);
-        float mMksTotal=((mMksShare*485)/100);
-        float mSnTotal=((mSnShare*1219)/100);
+        totalPort = (totalPort/100);
+        double newTotal = Math.round(totalPort*100)/100;
+    
+        textview.append(Html.fromHtml("<br><br><h1>Total Portfolio: <b>£ </b>"+"<b>"+(int)newTotal+"</b></h1>"));
         
-        //Rounds total to 2 decimal places
-        double newBpTotal = Math.round(mbpTotal*100)/100;
-        double newHsbcTotal = Math.round(mHsbcTotal*100)/100;
-        double newExTotal = Math.round(mExTotal*100)/100;
-        double newMksTotal = Math.round(mMksTotal*100)/100;
-        double newSnTotal = Math.round(mSnTotal*100)/100;
-        
-        //displays shares value
-        textview.append(Html.fromHtml(("<b><h1>RUN OF SHARES</h1></b><br>")));
+        textview.append(PrintSomething());
+        try {
+			textview.append(GetPreviousVolume());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			textview.append("MOTHERFUCKING ERROR");
+		}
+	}
+	
+	public String PrintSomething()
+	{		
+		return "Jazz";
 
-        textview.append(Html.fromHtml(("<b><i>BP Amoco</i></b><br>192 shares at ")));
-        textview.append(mbpShare+("\nTotal:                                          £"+(int)newBpTotal+"\n\n"));
-        textview.append(Html.fromHtml(("<b><i>Experian Ord.</i></b><br>258 shares at ")));
-        textview.append(mExShare+("\nTotal:                                          £"+(int)newExTotal+"\n\n"));
-        textview.append(Html.fromHtml(("<b><i>HSBC Holdings</i></b><br>343 shares at ")));
-        textview.append(mHsbcShare+("\nTotal:                                          £"+(int)newHsbcTotal+"\n\n"));
-        textview.append(Html.fromHtml(("<b><i>Marks & Spencer Ord.</i></b><br>485 shares at ")));
-        textview.append(mMksShare+("\nTotal:                                          £"+(int)newMksTotal+"\n\n"));
-        textview.append(Html.fromHtml(("<b><i>Smith and Nephew PLC</i></b><br>1219 shares at ")));
-        textview.append(mSnShare+("\nTotal:                                          £"+(int)newSnTotal+"\n\n"));
-        
-    }
+		
+	}
+	
+	public String GetPreviousVolume() throws IOException
+	{
+		URL con;
+		 con = new URL("http://shareprices.com/lse/bp");
+	        BufferedReader in = new BufferedReader(
+	        new InputStreamReader(
+	
+	        con.openStream()));       
+	        String line = "";
+	        int i = 0;
+	        
+	        while(i <364)
+	        {
+	        	line = in.readLine();
+	        	i++;
+	        }
+	        
+	        String sample=line;
+	        StringBuffer s = new StringBuffer(sample);
+	        StringBuffer AfterRemoval=s.delete(1,82);
+	        
+	        
+	        line = ("removed part:"+ s);
+	        String str = line;
+	        str = str.split("<")[0];
+	        line = str;
+	           
+		return line;
+	}
+
+	
 }
 
