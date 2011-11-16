@@ -5,8 +5,13 @@
       package="com.jazz.hellotabwidget">
       <uses-permission android:name="android.permission.INTERNET" />
     <uses-sdk android:minSdkVersion="10" />
+    
+          
+<instrumentation android:name="android.test.InstrumentationTestRunner"
+       android:targetPackage="com.jazz.hellotabwidget" android:label="Tests for App" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
+     <uses-library android:name="android.test.runner" />
         <activity android:name=".HelloTabWidgetActivity"
                   android:theme="@android:style/Theme.NoTitleBar"
                   android:screenOrientation="portrait">
@@ -14,7 +19,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+           
+            </activity>
         
         <activity android:name=".PortfolioActivity"
                   android:label="@string/app_name"
