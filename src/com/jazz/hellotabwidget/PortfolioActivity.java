@@ -17,7 +17,6 @@ public class PortfolioActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
         super.onCreate(savedInstanceState);
-   
         float mbpShare = 0;
         float mMksShare =0;
         float mSnShare=0;
@@ -44,7 +43,6 @@ public class PortfolioActivity extends Activity
 
         TextView textview = new TextView(this);
         textview.append(Html.fromHtml(("<h1><b>PORTFOLIO TOTAL VALUE</h1></b><br>")));
-        //BP AMOCO
         try
         {
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bpcode);
@@ -82,7 +80,6 @@ public class PortfolioActivity extends Activity
 	        textview.setText("\nError: No connection to the BP share value available.  Please try again.\n");
 	        e.printStackTrace();
         }
-        //EXPERIAN
 	    try
 	    {
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + excode);
@@ -120,7 +117,6 @@ public class PortfolioActivity extends Activity
 	        textview.setText("\nError: No connection to the Experian Share value available.  Please try again.\n");
 	        e.printStackTrace();
         }
-	    //HSBC
         try
         {
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + hbccode);
@@ -158,8 +154,7 @@ public class PortfolioActivity extends Activity
         {
         	textview.setText("\nError: No connection to the HSBC Share value available.  Please try again.\n");
         	e.printStackTrace();
-        } 
-        //MARKS AND SPENCER
+        }
         try
         {
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + mkscode);
@@ -199,7 +194,6 @@ public class PortfolioActivity extends Activity
 	        textview.setText("\nError: No connection to the MKS share value available.  Please try again.\n");
 	        e.printStackTrace();
         }
-        // SMITH AND NEPHEW
         try
         {
 		        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + sncode);       
@@ -238,7 +232,6 @@ public class PortfolioActivity extends Activity
 		       textview.setText("\nError: No connection to the SN value available.  Please try again.\n");
 		       e.printStackTrace();
 		}
-        // BOWLEVEN PLC
         try
         {
         	con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bplccode);       
@@ -276,7 +269,6 @@ public class PortfolioActivity extends Activity
 		       textview.setText("\nError: No connection to the Bowleven value available.  Please try again.\n");
 		       e.printStackTrace();
 		}
-        //
         totalPort = mbpShare*192;
         totalPort = totalPort+(mSnShare*1219);	
         totalPort = totalPort+(mHsbcShare*343);

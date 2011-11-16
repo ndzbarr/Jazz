@@ -16,16 +16,13 @@ public class SharesActivity extends Activity
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        // Let's display the progress in the activity title bar, like the
-        // browser app does.
-        
-        //BP Amoco PLC UNITS: 192
         float mbpShare = 0;
         float mMksShare =0;
         float mSnShare=0;
         float mExShare=0;
         float mHsbcShare=0;
         float mBShare=0;
+        //BP Amoco PLC UNITS: 192
         String bpcode = "LON:BP";
         //Marks and Spencer Ordinary UNITS: 485
         String mkscode = "LON:MKS";
@@ -40,7 +37,7 @@ public class SharesActivity extends Activity
         URL con;
 
         TextView textview = new TextView(this);
-        //textview.append("Portfolio Total calculated at current share prices: \n\n");
+        textview.append(Html.fromHtml(("<b><h1>INDIVIDUAL SHARES TOTAL</h1></b><br>")));
         try
         {
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bpcode);
@@ -66,7 +63,6 @@ public class SharesActivity extends Activity
 	        if (m.find())
 	        {
 	            String float1=m.group(1);
-	            //textview.append("BP Amoco PLC: "+float1.toString()+""+"\n");
 	        	mbpShare = Float.valueOf(float1.trim()).floatValue();
 	        }
 	        setContentView(textview);
@@ -103,7 +99,6 @@ public class SharesActivity extends Activity
 	        if (m.find())
 	        {
 	            String float2=m.group(1);
-	           // textview.append("Marks and Spencer Ordinary: "+float2.toString()+""+"\n");
 	            mMksShare = Float.valueOf(float2.trim()).floatValue();
 	
 	        }                                    
@@ -140,7 +135,6 @@ public class SharesActivity extends Activity
 		        if (m.find())
 		        {
 		            String float3=m.group(1);
-		           // textview.append("Smith & Nephew Plc: "+float3.toString()+""+"\n");
 		            mSnShare = Float.valueOf(float3.trim()).floatValue();
 		
 		        }                                             
@@ -177,7 +171,6 @@ public class SharesActivity extends Activity
 	        if (m.find())
 	        {
 	            String float4=m.group(1);
-	            //textview.append("Experian Ordinary: "+float4.toString()+""+"\n");
 	            mExShare = Float.valueOf(float4.trim()).floatValue();
 	        }                               
 	        setContentView(textview);
@@ -213,7 +206,6 @@ public class SharesActivity extends Activity
 	        if (m.find())
 	        {
 	            String float5=m.group(1);
-	           // textview.append("HSBC Holdings: "+float5.toString()+""+"\n");
 	            mHsbcShare = Float.valueOf(float5.trim()).floatValue();
 	        }
 	        
@@ -251,7 +243,6 @@ public class SharesActivity extends Activity
 	        if (m.find())
 	        {
 	            String float2=m.group(1);
-	           // textview.append("Marks and Spencer Ordinary: "+float2.toString()+""+"\n");
 	            mMksShare = Float.valueOf(float2.trim()).floatValue();
 	
 	        }                                    
@@ -288,8 +279,8 @@ public class SharesActivity extends Activity
 	        Matcher m = p.matcher(bShare);
 	        if (m.find())
 	        {
-	            String float2=m.group(1);
-	            mBShare = Float.valueOf(float2.trim()).floatValue();
+	            String float6=m.group(1);
+	            mBShare = Float.valueOf(float6.trim()).floatValue();
 	
 	        }                                    
 	        setContentView(textview);
@@ -309,7 +300,6 @@ public class SharesActivity extends Activity
         float mMksTotal=((mMksShare*485)/100);
         float mSnTotal=((mSnShare*1219)/100);
         float mBTotal=((mBShare*3960)/100);
-        
         //Rounds total to 2 decimal places
         double newBpTotal = Math.round(mbpTotal*100)/100;
         double newHsbcTotal = Math.round(mHsbcTotal*100)/100;
@@ -317,22 +307,19 @@ public class SharesActivity extends Activity
         double newMksTotal = Math.round(mMksTotal*100)/100;
         double newSnTotal = Math.round(mSnTotal*100)/100;
         double newBTotal = Math.round(mBTotal*100)/100;
-        
         //displays shares value
-        textview.append(Html.fromHtml(("<b><h1>INDIVIDUAL SHARES TOTAL</h1></b><br>")));
-
         textview.append(Html.fromHtml(("<b><i>BP Amoco</i></b><br>192 shares at ")));
-        textview.append(mbpShare+("\nTotal:                                          £"+(int)newBpTotal+"\n\n"));
+        textview.append(mbpShare+("\nTotal:                                          £"+(int)newBpTotal+"\n"));
         textview.append(Html.fromHtml(("<b><i>Experian Ord.</i></b><br>258 shares at ")));
-        textview.append(mExShare+("\nTotal:                                          £"+(int)newExTotal+"\n\n"));
+        textview.append(mExShare+("\nTotal:                                          £"+(int)newExTotal+"\n"));
         textview.append(Html.fromHtml(("<b><i>HSBC Holdings</i></b><br>343 shares at ")));
-        textview.append(mHsbcShare+("\nTotal:                                          £"+(int)newHsbcTotal+"\n\n"));
+        textview.append(mHsbcShare+("\nTotal:                                          £"+(int)newHsbcTotal+"\n"));
         textview.append(Html.fromHtml(("<b><i>Marks & Spencer Ord.</i></b><br>485 shares at ")));
-        textview.append(mMksShare+("\nTotal:                                          £"+(int)newMksTotal+"\n\n"));
+        textview.append(mMksShare+("\nTotal:                                          £"+(int)newMksTotal+"\n"));
         textview.append(Html.fromHtml(("<b><i>Smith and Nephew PLC</i></b><br>1219 shares at ")));
-        textview.append(mSnShare+("\nTotal:                                          £"+(int)newSnTotal+"\n\n"));
+        textview.append(mSnShare+("\nTotal:                                          £"+(int)newSnTotal+"\n"));
         textview.append(Html.fromHtml(("<b><i>Bowleven PLC</i></b><br>3960 shares at ")));
-        textview.append(mBShare+("\nTotal:                                          £"+(int)newBTotal+"\n\n"));        
+        textview.append(mBShare+("\nTotal:                                          £"+(int)newBTotal+"\n"));        
     }
 }
 

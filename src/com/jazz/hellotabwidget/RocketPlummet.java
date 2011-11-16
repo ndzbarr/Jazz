@@ -16,17 +16,14 @@ public class RocketPlummet extends Activity
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        // Let's display the progress in the activity title bar, like the
-        // browser app does.
-        
-        //BP Amoco PLC UNITS: 192
         float mbpShare = 0;
         float mMksShare =0;
         float mSnShare=0;
         float mExShare=0;
         float mHsbcShare=0;
+        float mBShare=0;
+        //BP Amoco PLC UNITS: 192
         String bpcode = "LON:BP";
-
         //Marks and Spencer Ordinary UNITS: 485
         String mkscode = "LON:MKS";
         //Smith & Nephew PLC UNITS: 1219
@@ -35,10 +32,12 @@ public class RocketPlummet extends Activity
         String excode = "LON:EXPN";
         //HSBC Holding PLC UNITS: 343
         String hbccode = "LON:HSBA";
+        //Boleven PLC PLC UNITS: 3960
+        String bplccode = "LON:BLVN";
         URL con;
 
         TextView textview = new TextView(this);
-        //textview.append("Portfolio Total calculated at current share prices: \n\n");
+        textview.append(Html.fromHtml(("<b><h1>ROCKET OR PLUMMET</h1></b><br>")));
         try
         {
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bpcode);
@@ -64,7 +63,6 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float1=m.group(1);
-	            //textview.append("BP Amoco PLC: "+float1.toString()+""+"\n");
 	        	mbpShare = Float.valueOf(float1.trim()).floatValue();
 	        }
 	        setContentView(textview);
@@ -101,7 +99,6 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float2=m.group(1);
-	           // textview.append("Marks and Spencer Ordinary: "+float2.toString()+""+"\n");
 	            mMksShare = Float.valueOf(float2.trim()).floatValue();
 	
 	        }                                    
@@ -138,7 +135,6 @@ public class RocketPlummet extends Activity
 		        if (m.find())
 		        {
 		            String float3=m.group(1);
-		           // textview.append("Smith & Nephew Plc: "+float3.toString()+""+"\n");
 		            mSnShare = Float.valueOf(float3.trim()).floatValue();
 		
 		        }                                             
@@ -175,7 +171,6 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float4=m.group(1);
-	            //textview.append("Experian Ordinary: "+float4.toString()+""+"\n");
 	            mExShare = Float.valueOf(float4.trim()).floatValue();
 	        }                               
 	        setContentView(textview);
@@ -211,7 +206,6 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float5=m.group(1);
-	           // textview.append("HSBC Holdings: "+float5.toString()+""+"\n");
 	            mHsbcShare = Float.valueOf(float5.trim()).floatValue();
 	        }
 	        
@@ -223,35 +217,152 @@ public class RocketPlummet extends Activity
         	textview.setText("Error: No HSBC share value not available.  Please try again.\n");
         	e.printStackTrace();
         } 
+        try
+        {
+	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + mkscode);
+	        BufferedReader in = new BufferedReader(
+	        new InputStreamReader(
+	
+	        con.openStream()));
+	        String line = "";
+	        int i = 0;
+	        
+	        while(i <7)
+	        {
+		        line = in.readLine();
+		        i++;
+	        }
+	   
+	        String mksShare= line;
+	
+	        String re1=".*?";	// Non-greedy match on filler
+	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
+	
+	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+	        Matcher m = p.matcher(mksShare);
+	        if (m.find())
+	        {
+	            String float2=m.group(1);
+	            mMksShare = Float.valueOf(float2.trim()).floatValue();
+	
+	        }                                    
+	        setContentView(textview);
+	        in.close();
+        }
+        catch (Exception e)
+        {
+	        textview.setText("Error:  No MKS share value not available.  Please try again.\n");
+	        e.printStackTrace();
+        }
+        try
+        {
+	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bplccode);
+	        BufferedReader in = new BufferedReader(
+	        new InputStreamReader(
+	
+	        con.openStream()));
+	        String line = "";
+	        int i = 0;
+	        
+	        while(i <7)
+	        {
+		        line = in.readLine();
+		        i++;
+	        }
+	   
+	        String bShare= line;
+	
+	        String re1=".*?";	// Non-greedy match on filler
+	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
+	
+	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+	        Matcher m = p.matcher(bShare);
+	        if (m.find())
+	        {
+	            String float6=m.group(1);
+	            mBShare = Float.valueOf(float6.trim()).floatValue();
+	
+	        }                                    
+	        setContentView(textview);
+	        in.close();
+        }
+        catch (Exception e)
+        {
+	        textview.setText("Error:  No Bowleven share value not available.  Please try again.\n");
+	        e.printStackTrace();
+        }
+        
         
         //calculate shares total and divide by 100(to the pound)
-        float mbpTotal=((mbpShare*192)/100);
-        float mHsbcTotal=((mHsbcShare*343)/100);
-        float mExTotal=((mExShare*258)/100);
-        float mMksTotal=((mMksShare*485)/100);
-        float mSnTotal=((mSnShare*1219)/100);
-        
-        //Rounds total to 2 decimal places
-        double newBpTotal = Math.round(mbpTotal*100)/100;
-        double newHsbcTotal = Math.round(mHsbcTotal*100)/100;
-        double newExTotal = Math.round(mExTotal*100)/100;
-        double newMksTotal = Math.round(mMksTotal*100)/100;
-        double newSnTotal = Math.round(mSnTotal*100)/100;
-        
+        float mbpTotal=5;//((mbpShare*192)/100);
+        float mHsbcTotal=50;//((mHsbcShare*343)/100);
+        float mExTotal=50;//((mExShare*258)/100);
+        float mMksTotal=50;//((mMksShare*485)/100);
+        float mSnTotal=50;//((mSnShare*1219)/100);
+        float mBTotal=50;//((mBShare*3960)/100);
         //displays shares value
-        textview.append(Html.fromHtml(("<b><h1>ROCKET OR PLUMMET</h1></b><br>")));
-
-        textview.append(Html.fromHtml(("<b><i>BP Amoco</i></b><br>192 shares at ")));
-        textview.append(mbpShare+("\nTotal:                                          £"+(int)newBpTotal+"\n\n"));
-        textview.append(Html.fromHtml(("<b><i>Experian Ord.</i></b><br>258 shares at ")));
-        textview.append(mExShare+("\nTotal:                                          £"+(int)newExTotal+"\n\n"));
-        textview.append(Html.fromHtml(("<b><i>HSBC Holdings</i></b><br>343 shares at ")));
-        textview.append(mHsbcShare+("\nTotal:                                          £"+(int)newHsbcTotal+"\n\n"));
-        textview.append(Html.fromHtml(("<b><i>Marks & Spencer Ord.</i></b><br>485 shares at ")));
-        textview.append(mMksShare+("\nTotal:                                          £"+(int)newMksTotal+"\n\n"));
-        textview.append(Html.fromHtml(("<b><i>Smith and Nephew PLC</i></b><br>1219 shares at ")));
-        textview.append(mSnShare+("\nTotal:                                          £"+(int)newSnTotal+"\n\n"));
+        if(mbpTotal == 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - BP Amoco</i></b></font></big>")));
+        	textview.append(("\nThe shares have risen by "+(int)mbpTotal+"%\n"));
+        }
+        if(mbpTotal < 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - BP Amoco</i></b></font></big>")));
+        	textview.append(("\nThe shares have dropped by "+(int)mbpTotal+"%\n"));
+        }
+        if(mbpTotal == 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - HSBC Holdings</i></b></font></big>")));
+        	textview.append(("\nThe shares have risen by "+(int)mHsbcTotal+"%\n"));
+        }
+        if(mbpTotal < 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - HSBC Holdings</i></b></font></big>")));
+        	textview.append(("\nThe shares have dropped by "+(int)mHsbcTotal+"%\n"));
+        }
+        if(mbpTotal == 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Experian Ord.</i></b></font></big>")));
+        	textview.append(("\nThe shares have risen by "+(int)mExTotal+"%\n"));
+        }
+        if(mbpTotal < 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Experian Ord.</i></b></font></big>")));
+        	textview.append(("\nThe shares have dropped by "+(int)mExTotal+"%\n"));
+        }
+        
+        if(mbpTotal == 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Marks & Spencer Ord.</i></b></font></big>")));
+        	textview.append(("\nThe shares have risen by "+(int)mMksTotal+"%\n"));
+        }
+        if(mbpTotal < 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Marks & Spencer Ord.</i></b></font></big>")));
+        	textview.append(("\nThe shares have dropped by "+(int)mMksTotal+"%\n"));
+        }
+        if(mbpTotal == 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Smith and Nephew PLC</i></b></font></big>")));
+        	textview.append(("\nThe shares have risen by "+(int)mSnTotal+"%\n"));
+        }
+        if(mbpTotal < 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Smith and Nephew PLC</i></b></font></big>")));
+        	textview.append(("\nThe shares have dropped by "+(int)mSnTotal+"%\n"));
+        }
+        
+        if(mbpTotal == 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Bowleven PLC</i></b></font></big>")));
+        	textview.append(("\nThe shares have risen by "+(int)mBTotal+"%\n"));
+        }
+        if(mbpTotal < 50)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Bowleven PLC</i></b></font></big>")));
+        	textview.append(("\nThe shares have dropped by "+(int)mBTotal+"%\n"));
+        }
         
     }
 }
-
