@@ -22,28 +22,28 @@ public class SharesRun extends Activity
         
         String[] shareCodeArray;
         shareCodeArray = new String[6];
-        shareCodeArray[0] ="bp";
+        shareCodeArray[5] ="bp";
         shareCodeArray[1] ="expn";
         shareCodeArray[2] ="hsba";
         shareCodeArray[3] ="mks";
         shareCodeArray[4] ="sn";
-        shareCodeArray[5] ="blvn";
+        shareCodeArray[0] ="blvn";
         
         boolean noSharesOnRun = true;
+        textview.append(Html.fromHtml(("<b><h1>RUN OF SHARES</h1></b><br>")));
         
-        
-   
         try 
         {
         	setContentView(textview);
         	
-        	String previousVolume = GetPreviousBPVolume(shareCodeArray[0]);
-        	String currentVolume = GetCurrentBPVolume(shareCodeArray[0]);
+        	String previousVolume = GetPreviousGenericVolume(shareCodeArray[0]);
+        	String currentVolume = GetCurrentGenericVolume(shareCodeArray[0]);
         	String runPercent = GetRunPercent(previousVolume, currentVolume);
 
 
 			if(DisplayRun(runPercent)==true)
 			{
+				textview.append(Html.fromHtml(("<big><font color='green'><b><i>Bowleven PLC - RUN</i></b></font></big><br>")));
 				textview.append(FormatData(shareCodeArray[0])+"\n");
 				noSharesOnRun = false;
 			}
@@ -54,37 +54,61 @@ public class SharesRun extends Activity
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			textview.append("Connection Error! : Please Try Again");
-		}
-     
-       
-
-    try 
-    {
-    	setContentView(textview);
-    	
-    	String previousVolume = GetPreviousGenericVolume(shareCodeArray[1]);
-    	String currentVolume = GetCurrentGenericVolume(shareCodeArray[1]);
-    	String runPercent = GetRunPercent(previousVolume, currentVolume);
-
-
-		if(DisplayRun(runPercent)==true)
-		{
-			textview.append(FormatData(shareCodeArray[1])+"\n");
+			textview.append(Html.fromHtml(("<font color='#FFA500'><b><i>Connection Error on Bowleven PLC!</i></b></font><br>")));
 			noSharesOnRun = false;
 		}
+        
+        try 
+	    {
+	    	setContentView(textview);
+	    	
+	    	String previousVolume = GetPreviousBPVolume(shareCodeArray[5]);
+	    	String currentVolume = GetCurrentBPVolume(shareCodeArray[5]);
+	    	String runPercent = GetRunPercent(previousVolume, currentVolume);
 
-    }
 
-    catch (IOException e) 
-	{
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		textview.append("Connection Error! : Please Try Again");
-	}
- 
-   
+			if(DisplayRun(runPercent)==true)
+			{
+				textview.append(Html.fromHtml(("<big><font color='green'><b><i>BP Amoco - RUN</i></b></font></big><br>")));
+				textview.append(FormatData(shareCodeArray[5])+"\n");
+				noSharesOnRun = false;
+			}
 
+	    }
+
+	    catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			textview.append(Html.fromHtml(("<font color='#FFA500'><b><i>Connection Error on BP Amoco!</i></b></font><br>")));
+			noSharesOnRun = false;
+		}
+     
+       try 
+	    {
+	    	setContentView(textview);
+
+	    	String previousVolume = GetPreviousGenericVolume(shareCodeArray[1]);
+	    	String currentVolume = GetCurrentGenericVolume(shareCodeArray[1]);
+	    	String runPercent = GetRunPercent(previousVolume, currentVolume);
+
+
+			if(DisplayRun(runPercent)==true)
+			{
+				textview.append(Html.fromHtml(("<big><font color='green'><b><i>HSBC Holdings - RUN</i></b></font></big><br>")));
+				textview.append(FormatData(shareCodeArray[1])+"\n");
+				noSharesOnRun = false;
+			}
+
+	    }
+
+	    catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			textview.append(Html.fromHtml(("<font color='#FFA500'><b><i>Connection Error on HSBC Holdings!</i></b></font><br>")));
+			noSharesOnRun = false;
+		}
 	   try 
 	    {
 	    	setContentView(textview);
@@ -96,6 +120,7 @@ public class SharesRun extends Activity
 
 			if(DisplayRun(runPercent)==true)
 			{
+				textview.append(Html.fromHtml(("<big><font color='green'><b><i>Experian Ord. - RUN</i></b></font></big><br>")));
 				textview.append(FormatData(shareCodeArray[2])+"\n");
 				noSharesOnRun = false;
 			}
@@ -106,7 +131,8 @@ public class SharesRun extends Activity
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			textview.append("Connection Error! : Please Try Again");
+			textview.append(Html.fromHtml(("<font color='#FFA500'><b><i>Connection Error on Experian Ord.!</i></b></font><br>")));
+			noSharesOnRun = false;
 		}
 	   try 
 	    {
@@ -119,6 +145,7 @@ public class SharesRun extends Activity
 
 			if(DisplayRun(runPercent)==true)
 			{
+				textview.append(Html.fromHtml(("<big><font color='green'><b><i>Marks & Spencer Ord. - RUN</i></b></font></big><br>")));
 				textview.append(FormatData(shareCodeArray[3])+"\n");
 				noSharesOnRun = false;
 			}
@@ -129,7 +156,8 @@ public class SharesRun extends Activity
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			textview.append("Connection Error! : Please Try Again");
+			textview.append(Html.fromHtml(("<font color='#FFA500'><b><i>Connection Error on Marks & Spencer Ord.!</i></b></font><br>")));
+			noSharesOnRun = false;
 		}
 	   try 
 	    {
@@ -142,6 +170,7 @@ public class SharesRun extends Activity
 
 			if(DisplayRun(runPercent)==true)
 			{
+				textview.append(Html.fromHtml(("<big><font color='green'><b><i>Smith and Nephew PLC - RUN</i></b></font></big><br>")));
 				textview.append(FormatData(shareCodeArray[4])+"\n");
 				noSharesOnRun = false;
 			}
@@ -152,34 +181,13 @@ public class SharesRun extends Activity
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			textview.append("Connection Error! : Please Try Again");
-		}
-	   try 
-	    {
-	    	setContentView(textview);
-
-	    	String previousVolume = GetPreviousGenericVolume(shareCodeArray[5]);
-	    	String currentVolume = GetCurrentGenericVolume(shareCodeArray[5]);
-	    	String runPercent = GetRunPercent(previousVolume, currentVolume);
-
-
-			if(DisplayRun(runPercent)==true)
-			{
-				textview.append(FormatData(shareCodeArray[5])+"\n");
-				noSharesOnRun = false;
-			}
-
-	    }
-
-	    catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			textview.append("Connection Error! : Please Try Again");
+			textview.append(Html.fromHtml(("<font color='#FFA500'><b><i>Connection Error on Smith and Nephew PLC!<br><br>Check connection</i></b></font><br>")));
+			noSharesOnRun = false;
 		}
 
+	   
 	   if(noSharesOnRun == true) 
-		   textview.append("No Shares are on a run!");
+       	   textview.append(Html.fromHtml(("<big><font color='#FFA500'><b><i>NO SHARES ARE ON RUN</i></b></font></big>")));
 	   }
 
 	public String GetPreviousBPVolume(String code) throws IOException
@@ -354,7 +362,7 @@ public class SharesRun extends Activity
     	
 		percentValue = Double.parseDouble(runPercent);
 
-		if (percentValue >= 125)
+		if (percentValue >= 35)
 			isDisplayed = true;
 
     	return isDisplayed;
@@ -380,13 +388,8 @@ public class SharesRun extends Activity
     	
     	if(code=="blvn")
     		code = "Bowleven Shares";
-    		
-    	
-    	
-    	
+ 	
     	String dataString = code + " are on a run\n";
-    	
-    	
     	return dataString;
     }
 }
