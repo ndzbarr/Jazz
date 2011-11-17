@@ -13,15 +13,9 @@ import android.widget.TextView;
 
 public class RocketPlummet extends Activity 
 {
-    public void onCreate(Bundle savedInstanceState) 
+	public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        float mbpShare = 0;
-        float mMksShare =0;
-        float mSnShare=0;
-        float mExShare=0;
-        float mHsbcShare=0;
-        float mBShare=0;
         //BP Amoco PLC UNITS: 192
         String bpcode = "LON:BP";
         //Marks and Spencer Ordinary UNITS: 485
@@ -35,6 +29,12 @@ public class RocketPlummet extends Activity
         //Boleven PLC PLC UNITS: 3960
         String bplccode = "LON:BLVN";
         URL con;
+        float BpRocket=0;
+        float HsbcRocket=0;
+        float ExRocket=0;
+        float MksRocket=0;
+        float SnRocket=0;
+        float BRocket=0;
 
         TextView textview = new TextView(this);
         textview.append(Html.fromHtml(("<b><h1>ROCKET OR PLUMMET</h1></b><br>")));
@@ -48,7 +48,7 @@ public class RocketPlummet extends Activity
 	        String line = "";
 	        int i = 0;
 	        
-	        while(i <7)
+	        while(i <12)
 	        {
 	        	line = in.readLine();
 	        	i++;
@@ -63,14 +63,14 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float1=m.group(1);
-	        	mbpShare = Float.valueOf(float1.trim()).floatValue();
+	        	BpRocket = Float.valueOf(float1.trim()).floatValue();
 	        }
 	        setContentView(textview);
 	        in.close();
         }
         catch (Exception e)
         {
-	        textview.setText("Error: No BP share value not available.  Please try again.\n");
+	        textview.setText("Error: No BP share value available. Please try again.\n");
 	        e.printStackTrace();
         }
         try
@@ -83,7 +83,7 @@ public class RocketPlummet extends Activity
 	        String line = "";
 	        int i = 0;
 	        
-	        while(i <7)
+	        while(i <12)
 	        {
 		        line = in.readLine();
 		        i++;
@@ -99,7 +99,7 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float2=m.group(1);
-	            mMksShare = Float.valueOf(float2.trim()).floatValue();
+	            MksRocket = Float.valueOf(float2.trim()).floatValue();
 	
 	        }                                    
 	        setContentView(textview);
@@ -107,7 +107,7 @@ public class RocketPlummet extends Activity
         }
         catch (Exception e)
         {
-	        textview.setText("Error:  No MKS share value not available.  Please try again.\n");
+	        textview.setText("Error:  No MKS share value available. Please try again.\n");
 	        e.printStackTrace();
         }
         try
@@ -120,7 +120,7 @@ public class RocketPlummet extends Activity
 		        String line = "";
 		        int i = 0;
 		        
-		        while(i <7)
+		        while(i <12)
 		        {
 			        line = in.readLine();
 			        i++;
@@ -135,7 +135,7 @@ public class RocketPlummet extends Activity
 		        if (m.find())
 		        {
 		            String float3=m.group(1);
-		            mSnShare = Float.valueOf(float3.trim()).floatValue();
+		            SnRocket = Float.valueOf(float3.trim()).floatValue();
 		
 		        }                                             
 		        setContentView(textview);
@@ -143,7 +143,7 @@ public class RocketPlummet extends Activity
 	        }
         catch (Exception e)
         {
-		       textview.setText("Error: No Smith & Nephew share value not available.  Please try again.\n");
+		       textview.setText("Error: No Smith & Nephew share value available. Please try again.\n");
 		       e.printStackTrace();
 		}
 	    try
@@ -156,7 +156,7 @@ public class RocketPlummet extends Activity
 	        String line = "";
 	        int i = 0;
 	        
-	        while(i <7)
+	        while(i <12)
 	        {
 		        line = in.readLine();
 		        i++;
@@ -171,14 +171,14 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float4=m.group(1);
-	            mExShare = Float.valueOf(float4.trim()).floatValue();
+	            ExRocket = Float.valueOf(float4.trim()).floatValue();
 	        }                               
 	        setContentView(textview);
 	        in.close();
         }
         catch (Exception e)
         {
-	        textview.setText("Error: No Experian share value not  available.  Please try again.\n");
+	        textview.setText("Error: No Experian share value available. Please try again.\n");
 	        e.printStackTrace();
         }
         try
@@ -191,7 +191,7 @@ public class RocketPlummet extends Activity
 	        String line = "";
 	        int i = 0;
 	
-	        while(i <7)
+	        while(i <12)
 	        {
 		        line = in.readLine();
 		        i++;
@@ -206,7 +206,7 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float5=m.group(1);
-	            mHsbcShare = Float.valueOf(float5.trim()).floatValue();
+	            HsbcRocket = Float.valueOf(float5.trim()).floatValue();
 	        }
 	        
 	        setContentView(textview);
@@ -214,7 +214,7 @@ public class RocketPlummet extends Activity
         }
         catch (Exception e)
         {
-        	textview.setText("Error: No HSBC share value not available.  Please try again.\n");
+        	textview.setText("Error: No HSBC share value available. Please try again.\n");
         	e.printStackTrace();
         } 
         try
@@ -227,7 +227,7 @@ public class RocketPlummet extends Activity
 	        String line = "";
 	        int i = 0;
 	        
-	        while(i <7)
+	        while(i <12)
 	        {
 		        line = in.readLine();
 		        i++;
@@ -243,7 +243,7 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float2=m.group(1);
-	            mMksShare = Float.valueOf(float2.trim()).floatValue();
+	            MksRocket = Float.valueOf(float2.trim()).floatValue();
 	
 	        }                                    
 	        setContentView(textview);
@@ -251,7 +251,7 @@ public class RocketPlummet extends Activity
         }
         catch (Exception e)
         {
-	        textview.setText("Error:  No MKS share value not available.  Please try again.\n");
+	        textview.setText("Error:  No MKS share value available. Please try again.\n");
 	        e.printStackTrace();
         }
         try
@@ -264,7 +264,7 @@ public class RocketPlummet extends Activity
 	        String line = "";
 	        int i = 0;
 	        
-	        while(i <7)
+	        while(i <12)
 	        {
 		        line = in.readLine();
 		        i++;
@@ -280,7 +280,7 @@ public class RocketPlummet extends Activity
 	        if (m.find())
 	        {
 	            String float6=m.group(1);
-	            mBShare = Float.valueOf(float6.trim()).floatValue();
+	            BRocket = Float.valueOf(float6.trim()).floatValue();
 	
 	        }                                    
 	        setContentView(textview);
@@ -288,80 +288,77 @@ public class RocketPlummet extends Activity
         }
         catch (Exception e)
         {
-	        textview.setText("Error:  No Bowleven share value not available.  Please try again.\n");
+	        textview.setText("Error:  No Bowleven share value available. Please try again.\n");
 	        e.printStackTrace();
         }
         
-        
-        //calculate shares total and divide by 100(to the pound)
-        float mbpTotal=5;//((mbpShare*192)/100);
-        float mHsbcTotal=50;//((mHsbcShare*343)/100);
-        float mExTotal=50;//((mExShare*258)/100);
-        float mMksTotal=50;//((mMksShare*485)/100);
-        float mSnTotal=50;//((mSnShare*1219)/100);
-        float mBTotal=50;//((mBShare*3960)/100);
         //displays shares value
-        if(mbpTotal == 50)
+        int rocket = 1;
+        int plummet = -1;
+        if(BpRocket > rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - BP Amoco</i></b></font></big>")));
-        	textview.append(("\nThe shares have risen by "+(int)mbpTotal+"%\n"));
+        	textview.append(("\nThe shares have risen by "+BpRocket+"%\n"));
         }
-        if(mbpTotal < 50)
+        if(BpRocket < plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - BP Amoco</i></b></font></big>")));
-        	textview.append(("\nThe shares have dropped by "+(int)mbpTotal+"%\n"));
+        	textview.append(("\nThe shares have dropped by "+BpRocket+"%\n"));
         }
-        if(mbpTotal == 50)
+        
+        if(HsbcRocket > rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - HSBC Holdings</i></b></font></big>")));
-        	textview.append(("\nThe shares have risen by "+(int)mHsbcTotal+"%\n"));
+        	textview.append(("\nThe shares have risen by "+HsbcRocket+"%\n"));
         }
-        if(mbpTotal < 50)
+        if(HsbcRocket < plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - HSBC Holdings</i></b></font></big>")));
-        	textview.append(("\nThe shares have dropped by "+(int)mHsbcTotal+"%\n"));
+        	textview.append(("\nThe shares have dropped by "+HsbcRocket+"%\n"));
         }
-        if(mbpTotal == 50)
+        
+        if(ExRocket > rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Experian Ord.</i></b></font></big>")));
-        	textview.append(("\nThe shares have risen by "+(int)mExTotal+"%\n"));
+        	textview.append(("\nThe shares have risen by "+ExRocket+"%\n"));
         }
-        if(mbpTotal < 50)
+        if(ExRocket < plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Experian Ord.</i></b></font></big>")));
-        	textview.append(("\nThe shares have dropped by "+(int)mExTotal+"%\n"));
+        	textview.append(("\nThe shares have dropped by "+ExRocket+"%\n"));
         }
         
-        if(mbpTotal == 50)
+        if(MksRocket > rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Marks & Spencer Ord.</i></b></font></big>")));
-        	textview.append(("\nThe shares have risen by "+(int)mMksTotal+"%\n"));
+        	textview.append(("\nThe shares have risen by "+MksRocket+"%\n"));
         }
-        if(mbpTotal < 50)
+        if(MksRocket < plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Marks & Spencer Ord.</i></b></font></big>")));
-        	textview.append(("\nThe shares have dropped by "+(int)mMksTotal+"%\n"));
-        }
-        if(mbpTotal == 50)
-        {
-        	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Smith and Nephew PLC</i></b></font></big>")));
-        	textview.append(("\nThe shares have risen by "+(int)mSnTotal+"%\n"));
-        }
-        if(mbpTotal < 50)
-        {
-        	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Smith and Nephew PLC</i></b></font></big>")));
-        	textview.append(("\nThe shares have dropped by "+(int)mSnTotal+"%\n"));
+        	textview.append(("\nThe shares have dropped by "+MksRocket+"%\n"));
         }
         
-        if(mbpTotal == 50)
+        if(SnRocket > rocket)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Smith and Nephew PLC</i></b></font></big>")));
+        	textview.append(("\nThe shares have risen by "+SnRocket+"%\n"));
+        }
+        if(SnRocket < plummet)
+        {
+        	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Smith and Nephew PLC</i></b></font></big>")));
+        	textview.append(("\nThe shares have dropped by "+SnRocket+"%\n"));
+        }
+        
+        if(BRocket > rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Bowleven PLC</i></b></font></big>")));
-        	textview.append(("\nThe shares have risen by "+(int)mBTotal+"%\n"));
+        	textview.append(("\nThe shares have risen by "+BRocket+"%\n"));
         }
-        if(mbpTotal < 50)
+        if(BRocket < plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Bowleven PLC</i></b></font></big>")));
-        	textview.append(("\nThe shares have dropped by "+(int)mBTotal+"%\n"));
+        	textview.append(("\nThe shares have dropped by "+BRocket+"%\n"));
         }
         
     }
