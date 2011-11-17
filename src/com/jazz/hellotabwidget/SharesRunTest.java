@@ -9,10 +9,12 @@ import junit.framework.TestSuite;
 public class SharesRunTest extends AndroidTestCase {
 	
 	SharesRun unitTest;
+	
 	public static void main(String[] args)
 	{
-		junit.textui.TestRunner.run(suite());
+		//junit.textui.TestRunner.run(suite());
 	}
+	
 	protected void setUp()
 	{
 		unitTest =new SharesRun();
