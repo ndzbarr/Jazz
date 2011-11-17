@@ -1,6 +1,7 @@
 package com.jazz.hellotabwidget;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.regex.Matcher;
@@ -43,6 +44,43 @@ public class PortfolioActivity extends Activity
 
         TextView textview = new TextView(this);
         textview.append(Html.fromHtml(("<h1><b>PORTFOLIO TOTAL VALUE</h1></b><br>")));
+        try
+        {
+        	con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bplccode);       
+		    BufferedReader in = new BufferedReader(
+		    new InputStreamReader(
+		
+		    con.openStream()));
+		    String line = "";
+		    int i = 0;
+		       
+		    while(i <7)
+		    {
+			    line = in.readLine();
+			    i++;
+		    }
+		    String blShare= line;
+		       
+		    String re1=".*?";	// Non-greedy match on filler
+		    String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
+		
+		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    Matcher m = p.matcher(blShare);
+		    if (m.find())
+		    {
+		    	String float3=m.group(1);
+		        textview.append(Html.fromHtml(("<b><i>Bowleven PLC</i></b><br>")));
+		        textview.append(float3.toString()+""+"\n");
+		        mBShare = Float.valueOf(float3.trim()).floatValue();
+		    }                                             
+		        setContentView(textview);
+		        in.close();
+	    }
+        catch (Exception e)
+        {
+		       textview.setText("\nError: No connection to the Bowleven value available.  Please try again.\n");
+		       e.printStackTrace();
+		}
         try
         {
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bpcode);
@@ -232,43 +270,6 @@ public class PortfolioActivity extends Activity
 		       textview.setText("\nError: No connection to the SN value available.  Please try again.\n");
 		       e.printStackTrace();
 		}
-        try
-        {
-        	con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bplccode);       
-		    BufferedReader in = new BufferedReader(
-		    new InputStreamReader(
-		
-		    con.openStream()));
-		    String line = "";
-		    int i = 0;
-		       
-		    while(i <7)
-		    {
-			    line = in.readLine();
-			    i++;
-		    }
-		    String blShare= line;
-		       
-		    String re1=".*?";	// Non-greedy match on filler
-		    String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-		
-		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		    Matcher m = p.matcher(blShare);
-		    if (m.find())
-		    {
-		    	String float3=m.group(1);
-		        textview.append(Html.fromHtml(("<b><i>Bowleven PLC</i></b><br>")));
-		        textview.append(float3.toString()+""+"\n");
-		        mBShare = Float.valueOf(float3.trim()).floatValue();
-		    }                                             
-		        setContentView(textview);
-		        in.close();
-	    }
-        catch (Exception e)
-        {
-		       textview.setText("\nError: No connection to the Bowleven value available.  Please try again.\n");
-		       e.printStackTrace();
-		}
         totalPort = mbpShare*192;
         totalPort = totalPort+(mSnShare*1219);	
         totalPort = totalPort+(mHsbcShare*343);
@@ -279,6 +280,7 @@ public class PortfolioActivity extends Activity
         totalPort = (totalPort/100);
         double newTotal = Math.round(totalPort*100)/100;
     
-        textview.append(Html.fromHtml("<br><br><h1>Total Portfolio: <b>£ </b>"+"<b>"+(int)newTotal+"</b></h1>"));
+        textview.append(Html.fromHtml("<br><br><h1>Total Portfolio: <b>£ </b>"+"<b>"+String.format("%,.0f", newTotal)+"</b></h1>"));
+        
 	}
 }

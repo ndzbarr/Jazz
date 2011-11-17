@@ -40,7 +40,7 @@ public class HelloTabWidgetActivity extends TabActivity
         tabHost.addTab(spec);
         
         intent = new Intent().setClass(this, RocketPlummet.class);
-        spec = tabHost.newTabSpec("Rocket/Plumet").setIndicator("Rocket/Plumet",
+        spec = tabHost.newTabSpec("Rocket or Plummet").setIndicator("Rocket or Plummet",
                 res.getDrawable(R.drawable.ic_tab_rise))
             .setContent(intent);
         tabHost.addTab(spec);

@@ -6,6 +6,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+
+
 public class SharesRunTest extends AndroidTestCase {
 	
 	SharesRun unitTest;
@@ -13,7 +15,7 @@ public class SharesRunTest extends AndroidTestCase {
 	
 	public static void main(String[] args)
 	{
-		//junit.textui.TestRunner.run(suite());
+		junit.textui.TestRunner.run(suite());
 	}
 	
 	protected void setUp()

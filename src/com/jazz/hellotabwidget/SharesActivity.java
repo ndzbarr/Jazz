@@ -308,6 +308,8 @@ public class SharesActivity extends Activity
         double newSnTotal = Math.round(mSnTotal*100)/100;
         double newBTotal = Math.round(mBTotal*100)/100;
         //displays shares value
+        textview.append(Html.fromHtml(("<b><i>Bowleven PLC</i></b><br>3960 shares at ")));
+        textview.append(mBShare+("\nTotal:                                          £"+(int)newBTotal+"\n"));
         textview.append(Html.fromHtml(("<b><i>BP Amoco</i></b><br>192 shares at ")));
         textview.append(mbpShare+("\nTotal:                                          £"+(int)newBpTotal+"\n"));
         textview.append(Html.fromHtml(("<b><i>Experian Ord.</i></b><br>258 shares at ")));
@@ -317,9 +319,7 @@ public class SharesActivity extends Activity
         textview.append(Html.fromHtml(("<b><i>Marks & Spencer Ord.</i></b><br>485 shares at ")));
         textview.append(mMksShare+("\nTotal:                                          £"+(int)newMksTotal+"\n"));
         textview.append(Html.fromHtml(("<b><i>Smith and Nephew PLC</i></b><br>1219 shares at ")));
-        textview.append(mSnShare+("\nTotal:                                          £"+(int)newSnTotal+"\n"));
-        textview.append(Html.fromHtml(("<b><i>Bowleven PLC</i></b><br>3960 shares at ")));
-        textview.append(mBShare+("\nTotal:                                          £"+(int)newBTotal+"\n"));        
+        textview.append(mSnShare+("\nTotal:                                          £"+(int)newSnTotal+"\n"));        
     }
 }
 
