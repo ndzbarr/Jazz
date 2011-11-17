@@ -380,10 +380,7 @@ public class SharesRun extends Activity
     	
     	if(code=="blvn")
     		code = "Bowleven Shares";
-    		
-    	
-    	
-    	
+
     	String dataString = code + " are on a run\n";
     	
     	
