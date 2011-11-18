@@ -1,0 +1,84 @@
+Refactored Code
+
+
+During the course of our project our program went through several iterations. Some of these iterations involved refactoring the code. Below are some examples of the code that we refactored. A before and after will be presented and the line number the code begins on.
+
+Here is a snippet of code that shows how we had 6 individual strings holding share codes and we refactored it into a single array holding all 6.
+
+Inside SharesRun.Java class:
+
+public void onCreate(Bundle savedInstanceState) starting on line 23:
+Before :
+
+        String bpCode ="bp";
+        String expnCode ="expn";
+        String hsbaCode ="hsba";
+        String mksCode ="mks";
+        String snCode ="sn";
+        String blvnCode ="blvn";
+        	
+After :
+
+        String[] shareCodeArray;
+        shareCodeArray = new String[6];
+        shareCodeArray[5] ="bp";
+        shareCodeArray[2] ="expn";
+        shareCodeArray[1] ="hsba";
+        shareCodeArray[3] ="mks";
+        shareCodeArray[4] ="sn";
+        shareCodeArray[0] ="blvn";
+        
+
+
+Below is a simple refactor in which a variable name was changes to something more meaningful.
+
+public String FormatData(String code) starting on line 374:
+Before:
+
+	if(code == "bp")
+    		code = "BP shares";
+    	if (code =="expn")
+    		code ="Experian Ordinary shares";
+    	if (code == "hsba")
+    		code = "HSBC Holdings share";
+    	if(code=="mks")
+    		code = "Marks and Spencer Ordinary shares";
+    	if(code=="sn")
+    		code = "Smith and Nephew shares";
+    	if(code=="blvn")
+    		code = "Bowleven Shares";
+    	String dataString = code + " are on a run\n";
+After:
+
+	if(sharesCode == "bp")
+    		sharesCode = "BP shares";
+    	if (sharesCode =="expn")
+    		sharesCode ="Experian Ordinary shares";
+    	if (sharesCode == "hsba")
+    		sharesCode = "HSBC Holdings share";
+    	if(sharesCode=="mks")
+    		sharesCode = "Marks and Spencer Ordinary shares";
+    	if(sharesCode code=="sn")
+    		sharesCode = "Smith and Nephew shares";
+    	if(sharesCode=="blvn")
+    		sharesCode = "Bowleven Shares";
+    	String dataString = sharesCode + " are on a run\n";
+
+
+Below is an example of where we had to refactor a variable from a global variable into local variables at each instance they occur
+
+public void onCreate(Bundle savedInstanceState) Starting on line 39, ending on 168.
+After
+		
+
+	String previousVolume = GetPreviousBPVolume(shareCodeArray[5]);
+	String currentVolume = GetCurrentBPVolume(shareCodeArray[5]);
+	String runPercent = GetRunPercent(previousVolume, currentVolume);
+…
+…
+	String previousVolume = GetPreviousGenericVolume(shareCodeArray[2]);
+	String currentVolume = GetCurrentGenericVolume(shareCodeArray[2]);
+	String runPercent = GetRunPercent(previousVolume, currentVolume);
+…
+…
+Before the above code was changed, the previousVolume, currentVolume and runPercent were global variables. This was easily refactored by deleting the global declarations and adding each of them as local declarations. The code continues on in this manner throughout the range of lines indicated above for each index of the shareCodeArray. 
