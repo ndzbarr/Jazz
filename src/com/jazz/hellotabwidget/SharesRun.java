@@ -23,8 +23,8 @@ public class SharesRun extends Activity
         String[] shareCodeArray;
         shareCodeArray = new String[6];
         shareCodeArray[5] ="bp";
-        shareCodeArray[1] ="expn";
-        shareCodeArray[2] ="hsba";
+        shareCodeArray[2] ="expn";
+        shareCodeArray[1] ="hsba";
         shareCodeArray[3] ="mks";
         shareCodeArray[4] ="sn";
         shareCodeArray[0] ="blvn";

@@ -298,80 +298,80 @@ public class RocketPlummet extends Activity
         DecimalFormat newFormat = new DecimalFormat("##.#");
         
         //TEST DATA
-        BRocket = 16.4f;
-        MksRocket = 12.7f;
-        SnRocket = -27.8f;
+        //BRocket = 9.9f;
+        //MksRocket = 28.8f;
+        //SnRocket = -20.0f;
         
         int rocket = 10;
         int plummet = -20;
         boolean RocketPlummet =false;
-        if(BRocket > rocket)
+        if(BRocket >= rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Bowleven PLC</i></b></font></big>")));
         	textview.append(("\nThe shares have risen by "+Float.valueOf(newFormat.format(BRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(BRocket < plummet)
+        if(BRocket <= plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Bowleven PLC</i></b></font></big>")));
         	textview.append(("\nThe shares have dropped by "+Float.valueOf(newFormat.format(BRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(BpRocket > rocket)
+        if(BpRocket >= rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - BP Amoco</i></b></font></big>")));
         	textview.append(("\nThe shares have risen by "+Float.valueOf(newFormat.format(BpRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(BpRocket < plummet)
+        if(BpRocket <= plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - BP Amoco</i></b></font></big>")));
         	textview.append(("\nThe shares have dropped by "+Float.valueOf(newFormat.format(BpRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(ExRocket > rocket)
+        if(ExRocket >= rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Experian Ord.</i></b></font></big>")));
         	textview.append(("\nThe shares have risen by "+Float.valueOf(newFormat.format(ExRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(ExRocket < plummet)
+        if(ExRocket <= plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Experian Ord.</i></b></font></big>")));
         	textview.append(("\nThe shares have dropped by "+Float.valueOf(newFormat.format(ExRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(HsbcRocket > rocket)
+        if(HsbcRocket >= rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - HSBC Holdings</i></b></font></big>")));
         	textview.append(("\nThe shares have risen by "+Float.valueOf(newFormat.format(HsbcRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(HsbcRocket < plummet)
+        if(HsbcRocket <= plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - HSBC Holdings</i></b></font></big>")));
         	textview.append(("\nThe shares have dropped by "+Float.valueOf(newFormat.format(HsbcRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(MksRocket > rocket)
+        if(MksRocket >= rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Marks & Spencer Ord.</i></b></font></big>")));
         	textview.append(("\nThe shares have risen by "+Float.valueOf(newFormat.format(MksRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(MksRocket < plummet)
+        if(MksRocket <= plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Marks & Spencer Ord.</i></b></font></big>")));
         	textview.append(("\nThe shares have dropped by "+Float.valueOf(newFormat.format(MksRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(SnRocket > rocket)
+        if(SnRocket >= rocket)
         {
         	textview.append(Html.fromHtml(("<big><font color='green'><b><i>ROCKET - Smith and Nephew PLC</i></b></font></big>")));
         	textview.append(("\nThe shares have risen by "+Float.valueOf(newFormat.format(SnRocket))+"%\n\n"));
         	RocketPlummet =true;
         }
-        if(SnRocket < plummet)
+        if(SnRocket <= plummet)
         {
         	textview.append(Html.fromHtml(("<big><font color='red'><b><i>PLUMMET - Smith and Nephew PLC</i></b></font></big>")));
         	textview.append(("\nThe shares have dropped by "+Float.valueOf(newFormat.format(SnRocket))+"%\n\n"));
