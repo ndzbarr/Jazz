@@ -88,15 +88,15 @@ public class SharesRun extends Activity
 	    {
 	    	setContentView(textview);
 
-	    	String previousVolume = GetPreviousGenericVolume(shareCodeArray[1]);
-	    	String currentVolume = GetCurrentGenericVolume(shareCodeArray[1]);
+	    	String previousVolume = GetPreviousGenericVolume(shareCodeArray[2]);
+	    	String currentVolume = GetCurrentGenericVolume(shareCodeArray[2]);
 	    	String runPercent = GetRunPercent(previousVolume, currentVolume);
 
 
 			if(DisplayRun(runPercent)==true)
 			{
 				textview.append(Html.fromHtml(("<big><font color='green'><b><i>HSBC Holdings - RUN</i></b></font></big><br>")));
-				textview.append(FormatData(shareCodeArray[1])+"\n");
+				textview.append(FormatData(shareCodeArray[2])+"\n");
 				noSharesOnRun = false;
 			}
 
@@ -113,15 +113,15 @@ public class SharesRun extends Activity
 	    {
 	    	setContentView(textview);
 
-	    	String previousVolume = GetPreviousGenericVolume(shareCodeArray[2]);
-	    	String currentVolume = GetCurrentGenericVolume(shareCodeArray[2]);
+	    	String previousVolume = GetPreviousGenericVolume(shareCodeArray[1]);
+	    	String currentVolume = GetCurrentGenericVolume(shareCodeArray[1]);
 	    	String runPercent = GetRunPercent(previousVolume, currentVolume);
 
 
 			if(DisplayRun(runPercent)==true)
 			{
 				textview.append(Html.fromHtml(("<big><font color='green'><b><i>Experian Ord. - RUN</i></b></font></big><br>")));
-				textview.append(FormatData(shareCodeArray[2])+"\n");
+				textview.append(FormatData(shareCodeArray[1])+"\n");
 				noSharesOnRun = false;
 			}
 
@@ -369,27 +369,27 @@ public class SharesRun extends Activity
     }
     
     
-    public String FormatData(String code)
+    public String FormatData(String sharesCode)
     {
-    	if (code == "bp")   //code swaps, to ease readabilty 
-    		code = "Bp Amoco shares";
+    	if(sharesCode == "bp")
+    		sharesCode = "BP shares";
     	
-    	if (code =="expn")
-    		code ="Experian Ordinary shares";
+    	if (sharesCode =="expn")
+    		sharesCode ="Experian Ordinary shares";
+    
+    	if (sharesCode == "hsba")
+    		sharesCode = "HSBC Holdings share";
     	
-    	if (code =="hsba")
-    		code ="HSBC Holdings shares";
+    	if(sharesCode=="mks")
+    		sharesCode = "Marks and Spencer Ordinary shares";
     	
-    	if(code=="mks")
-    		code = "Marks and Spencer Ordinary shares";
+    	if(sharesCode=="sn")
+    		sharesCode = "Smith and Nephew shares";
     	
-    	if(code=="sn")
-    		code = "Smith and Nephew shares";
-    	
-    	if(code=="blvn")
-    		code = "Bowleven Shares";
+    	if(sharesCode=="blvn")
+    		sharesCode = "Bowleven Shares";
  	
-    	String dataString = code + " are on a run\n";
+    	String dataString = sharesCode + " are on a run\n";
     	return dataString;
     }
 }
