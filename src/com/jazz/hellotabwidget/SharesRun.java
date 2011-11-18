@@ -61,7 +61,7 @@ public class SharesRun extends Activity
         try 
 	    {
 	    	setContentView(textview);
-	    	
+
 	    	String previousVolume = GetPreviousBPVolume(shareCodeArray[5]);
 	    	String currentVolume = GetCurrentBPVolume(shareCodeArray[5]);
 	    	String runPercent = GetRunPercent(previousVolume, currentVolume);
@@ -185,7 +185,7 @@ public class SharesRun extends Activity
 			noSharesOnRun = false;
 		}
 
-	   
+
 	   if(noSharesOnRun == true) 
        	   textview.append(Html.fromHtml(("<big><font color='#FFA500'><b><i>NO SHARES ARE ON RUN</i></b></font></big>")));
 	   }
@@ -393,5 +393,3 @@ public class SharesRun extends Activity
     	return dataString;
     }
 }
-
-

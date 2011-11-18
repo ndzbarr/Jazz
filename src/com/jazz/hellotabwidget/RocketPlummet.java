@@ -44,21 +44,21 @@ public class RocketPlummet extends Activity
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bpcode);
 	        BufferedReader in = new BufferedReader(
 	        new InputStreamReader(
-	
+
 	        con.openStream()));       
 	        String line = "";
 	        int i = 0;
-	        
+
 	        while(i <13)
 	        {
 	        	line = in.readLine();
 	        	i++;
 	        }
 	        String bpShare= line;
-	
+
 	        String re1=".*?";	// Non-greedy match on filler
 	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-	
+
 	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	        Matcher m = p.matcher(bpShare);
 	        if (m.find())
@@ -79,29 +79,29 @@ public class RocketPlummet extends Activity
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + mkscode);
 	        BufferedReader in = new BufferedReader(
 	        new InputStreamReader(
-	
+
 	        con.openStream()));
 	        String line = "";
 	        int i = 0;
-	        
+
 	        while(i <13)
 	        {
 		        line = in.readLine();
 		        i++;
 	        }
-	   
+
 	        String mksShare= line;
-	
+
 	        String re1=".*?";	// Non-greedy match on filler
 	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-	
+
 	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	        Matcher m = p.matcher(mksShare);
 	        if (m.find())
 	        {
 	            String float2=m.group(1);
 	            MksRocket = Float.valueOf(float2.trim()).floatValue();
-	
+
 	        }                                    
 	        setContentView(textview);
 	        in.close();
@@ -116,28 +116,28 @@ public class RocketPlummet extends Activity
 		        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + sncode);       
 		        BufferedReader in = new BufferedReader(
 		        new InputStreamReader(
-		
+
 		        con.openStream()));
 		        String line = "";
 		        int i = 0;
-		        
+
 		        while(i <13)
 		        {
 			        line = in.readLine();
 			        i++;
 		        }
 		        String snShare= line;
-		        
+
 		        String re1=".*?";	// Non-greedy match on filler
 		        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-		
+
 		        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 		        Matcher m = p.matcher(snShare);
 		        if (m.find())
 		        {
 		            String float3=m.group(1);
 		            SnRocket = Float.valueOf(float3.trim()).floatValue();
-		
+
 		        }                                             
 		        setContentView(textview);
 		        in.close();
@@ -152,21 +152,21 @@ public class RocketPlummet extends Activity
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + excode);
 	        BufferedReader in = new BufferedReader(
 	        new InputStreamReader(
-	
+
 	        con.openStream()));
 	        String line = "";
 	        int i = 0;
-	        
+
 	        while(i <13)
 	        {
 		        line = in.readLine();
 		        i++;
 	        }
 	        String exShare= line;
-	
+
 	        String re1=".*?";	// Non-greedy match on filler
 	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-	
+
 	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	        Matcher m = p.matcher(exShare);
 	        if (m.find())
@@ -187,21 +187,21 @@ public class RocketPlummet extends Activity
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + hbccode);
 	        BufferedReader in = new BufferedReader(
 	        new InputStreamReader(
-	        		
+
 	        con.openStream()));
 	        String line = "";
 	        int i = 0;
-	
+
 	        while(i <13)
 	        {
 		        line = in.readLine();
 		        i++;
 	        }
-	
+
 	        String hsbcShare= line;
 	        String re1=".*?";	// Non-greedy match on filler
 	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-	
+
 	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	        Matcher m = p.matcher(hsbcShare);
 	        if (m.find())
@@ -209,7 +209,7 @@ public class RocketPlummet extends Activity
 	            String float5=m.group(1);
 	            HsbcRocket = Float.valueOf(float5.trim()).floatValue();
 	        }
-	        
+
 	        setContentView(textview);
 	        in.close();
         }
@@ -223,29 +223,29 @@ public class RocketPlummet extends Activity
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + mkscode);
 	        BufferedReader in = new BufferedReader(
 	        new InputStreamReader(
-	
+
 	        con.openStream()));
 	        String line = "";
 	        int i = 0;
-	        
+
 	        while(i <13)
 	        {
 		        line = in.readLine();
 		        i++;
 	        }
-	   
+
 	        String mksShare= line;
-	
+
 	        String re1=".*?";	// Non-greedy match on filler
 	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-	
+
 	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	        Matcher m = p.matcher(mksShare);
 	        if (m.find())
 	        {
 	            String float2=m.group(1);
 	            MksRocket = Float.valueOf(float2.trim()).floatValue();
-	
+
 	        }                                    
 	        setContentView(textview);
 	        in.close();
@@ -260,29 +260,29 @@ public class RocketPlummet extends Activity
 	        con = new URL("http://finance.google.com/finance/info?client=ig&q=" + bplccode);
 	        BufferedReader in = new BufferedReader(
 	        new InputStreamReader(
-	
+
 	        con.openStream()));
 	        String line = "";
 	        int i = 0;
-	        
+
 	        while(i <13)
 	        {
 		        line = in.readLine();
 		        i++;
 	        }
-	   
+
 	        String bShare= line;
-	
+
 	        String re1=".*?";	// Non-greedy match on filler
 	        String re2="([+-]?\\d*\\.\\d+)(?![-+0-9\\.])";	// Float 1
-	
+
 	        Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	        Matcher m = p.matcher(bShare);
 	        if (m.find())
 	        {
 	            String float6=m.group(1);
 	            BRocket = Float.valueOf(float6.trim()).floatValue();
-	
+
 	        }                                    
 	        setContentView(textview);
 	        in.close();
