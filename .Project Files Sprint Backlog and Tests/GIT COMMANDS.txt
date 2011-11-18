@@ -1,0 +1,14 @@
+ADD:
+git add . //ADD ALL
+
+git commit -m "adding stuff"
+
+git push
+
+DELETED:
+git add -u
+
+OTHER PEOPLES:
+git pull
+
+Git is lame.
